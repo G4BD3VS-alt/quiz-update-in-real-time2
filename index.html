@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080b18">
+    <title>Quiz de Machine Learning</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <span class="pixel-ship pixel-ship--blue" aria-hidden="true">
+        <span class="pixel-ship__detail"></span>
+        <span class="pixel-ship__shot"></span>
+    </span>
+    <span class="pixel-ship pixel-ship--red" aria-hidden="true">
+        <span class="pixel-ship__detail"></span>
+        <span class="pixel-ship__shot"></span>
+    </span>
+    <header class="quiz-header">
+        <h1 id="main-title">Star Tag</h1>
+    </header>
+    <main class="quiz-shell">
+        <section id="screen-home" class="screen screen-home">
+            <header class="home-header">
+                <span class="brand-label">Star Tag Quiz</span>
+                <button type="button" class="icon-button admin-trigger" onclick="openAdminModal()" title="Painel Administrativo" aria-label="Abrir painel administrativo">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1a1.7 1.7 0 0 1-2.4 2.4l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 0 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 0 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 0 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 0 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V2a1.7 1.7 0 0 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 0 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 0 1 0 3.4h-.2a1.7 1.7 0 0 0-1.2 2.9Z"/></svg>
+                </button>
+            </header>
+
+            <div class="home-intro">
+                <h1>Machine Learning</h1>
+                <p>Digite seu nome, teste seus conhecimentos e conquiste o topo do ranking!</p>
+            </div>
+
+            <form class="start-form" onsubmit="event.preventDefault(); startQuiz();">
+                <label for="username">Seu Nome / Apelido</label>
+                <input type="text" id="username" placeholder="Ex: Ada Lovelace" autocomplete="nickname" maxlength="60">
+                <button type="submit" class="primary-button">
+                    <span>Iniciar Quiz</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+                </button>
+            </form>
+
+            <div class="section-divider"><span>Ranking Global</span></div>
+
+            <section class="leaderboard-section" aria-labelledby="leaderboard-title">
+                <div class="leaderboard-heading">
+                    <h2 id="leaderboard-title">Placar Geral</h2>
+                    <span id="total-players-count" class="record-count">0 jogadores</span>
+                </div>
+                <div id="home-leaderboard-list" class="leaderboard-list"></div>
+            </section>
+        </section>
+
+        <section id="screen-quiz" class="screen quiz-screen is-hidden" aria-live="polite">
+            <div class="quiz-progress-area">
+                <div class="quiz-progress-labels">
+                    <span id="question-progress">Questão 1 de 5</span>
+                    <span id="player-display" class="player-name"></span>
+                </div>
+                <div class="progress-track"><div id="progress-bar" class="progress-fill"></div></div>
+            </div>
+            <div class="question-area">
+                <h2 id="question-text"></h2>
+                <div id="options-container" class="options-list"></div>
+            </div>
+        </section>
+
+        <section id="screen-result" class="screen result-screen is-hidden" aria-live="polite">
+            <div class="result-intro">
+                <div class="result-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="m8 12 2.5 2.5L16 9"/><circle cx="12" cy="12" r="9"/></svg>
+                </div>
+                <h2>Quiz Finalizado!</h2>
+                <p>Sua pontuação foi registrada automaticamente no placar.</p>
+            </div>
+            <div class="score-panel">
+                <span class="score-caption">Sua Pontuação Final</span>
+                <div id="final-score" class="final-score">0 / 0</div>
+                <p id="feedback-message" class="feedback-message"></p>
+            </div>
+            <section class="result-leaderboard" aria-labelledby="result-leaderboard-title">
+                <h3 id="result-leaderboard-title">Ranking Global</h3>
+                <div id="result-podium" class="result-podium"></div>
+                <section class="result-rest-section" aria-labelledby="result-rest-title">
+                    <h4 id="result-rest-title">Demais colocações</h4>
+                    <div id="result-rest-list" class="result-rest-list"></div>
+                </section>
+            </section>
+            <button type="button" onclick="resetHome()" class="primary-button replay-button">Jogar Novamente</button>
+        </section>
+    </main>
+
+    <div id="admin-modal" class="modal-backdrop is-hidden" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+        <section class="admin-modal">
+            <header class="modal-header">
+                <h2 id="admin-title">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2Zm10-10V7a4 4 0 0 0-8 0v4h8Z"/></svg>
+                    Painel Administrativo
+                </h2>
+                <button type="button" onclick="closeAdminModal()" class="icon-button close-button" aria-label="Fechar painel">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                </button>
+            </header>
+
+            <div id="admin-auth-view" class="admin-auth">
+                <p>Digite a senha de administrador para acessar os controles (Senha padrão: <code>1234</code>)</p>
+                <input type="password" id="admin-password" placeholder="Senha..." autocomplete="current-password">
+                <button type="button" onclick="verifyAdminPassword()" class="primary-button admin-submit">Entrar</button>
+            </div>
+
+            <div id="admin-panel-view" class="admin-panel is-hidden">
+                <div class="admin-note">
+                    <span>Gerenciamento do Placar</span>
+                    <p>Exclua pontuações individuais ou limpe todo o histórico de uma só vez.</p>
+                </div>
+                <div class="admin-list" id="admin-leaderboard-list"></div>
+                <button type="button" onclick="adminClearLeaderboard()" class="danger-button">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18m-2 0-.9 14H5.9L5 6m4 0V4h6v2m-5 4v6m4-6v6"/></svg>
+                    <span>Limpar Todo o Placar</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+</body>
+</html>
