@@ -12,74 +12,74 @@ const supabase = createClient(
 
 const questions = [
     {
-        question: "Qual é a principal diferença entre viés (bias) e variância em um modelo de Machine Learning?",
+        question: "Como um modelo de Machine Learning costuma aprender a fazer previsões?",
         options: [
-            "Viés mede erros por simplificação excessiva; variância mede sensibilidade às flutuações dos dados de treino.",
-            "Viés mede o tamanho do conjunto de dados; variância mede o número de classes do problema.",
-            "Viés se aplica apenas a redes neurais; variância se aplica apenas a árvores de decisão.",
-            "Viés é o tempo de treino; variância é o tempo de inferência."
+            "Analisa exemplos e identifica padrões que ajudam a prever resultados em novos casos.",
+            "Segue uma lista fixa de respostas escrita manualmente para cada situação possível.",
+            "Escolhe respostas aleatórias e melhora sem usar exemplos ou informações.",
+            "Armazena todos os dados e sempre repete exatamente a última resposta recebida."
         ],
         correct: 0
     },
     {
-        question: "Por que K-fold Cross-Validation pode ser preferível a uma única divisão treino/teste?",
+        question: "Em um exemplo de aprendizado supervisionado, o que é o rótulo (label)?",
         options: [
-            "Porque elimina completamente o overfitting.",
-            "Porque permite avaliar o modelo em diferentes divisões dos dados, reduzindo a dependência de uma única amostra.",
-            "Porque transforma automaticamente o problema em aprendizado não supervisionado.",
-            "Porque aumenta o número de linhas de cada conjunto sem modificar os dados originais."
+            "A ordem em que os exemplos foram adicionados ao computador.",
+            "O resultado conhecido associado a um exemplo, que serve de referência para o modelo aprender.",
+            "O nome do programa usado para armazenar os dados.",
+            "Uma previsão que o modelo faz antes de receber qualquer exemplo."
         ],
         correct: 1
     },
     {
-        question: "Em qual situação a métrica F1-score costuma ser mais adequada que a acurácia?",
+        question: "Um aplicativo prevê se uma mensagem é spam ou não e outro estima o preço de uma casa. Como esses problemas se diferenciam?",
         options: [
-            "Quando o conjunto é perfeitamente balanceado.",
-            "Quando a precisão e o recall possuem pesos idênticos no problema.",
-            "Quando há classes muito desbalanceadas e os falsos positivos e falsos negativos são relevantes.",
-            "Quando todas as classes têm exatamente o mesmo número de amostras."
+            "O primeiro é aprendizado supervisionado; o segundo não pode usar dados anteriores.",
+            "Os dois são previsões de categorias, porque usam informações de casas e mensagens.",
+            "O primeiro prevê uma categoria; o segundo estima um valor numérico.",
+            "O primeiro estima um valor numérico; o segundo escolhe apenas entre categorias."
         ],
         correct: 2
     },
     {
-        question: "Qual técnica é usada para reduzir a dimensionalidade preservando ao máximo a variância dos dados?",
+        question: "Por que é importante avaliar um modelo usando exemplos que ele não usou para aprender?",
         options: [
-            "Regressão Logística",
-            "Análise de Componentes Principais (PCA)",
-            "Regularização L1",
-            "One-hot encoding"
+            "Para garantir que ele sempre acerte todos os exemplos usados no treino.",
+            "Para verificar se ele consegue lidar com casos novos, e não apenas com os exemplos de treino.",
+            "Para permitir que as respostas dos exemplos de teste sejam incluídas no treino.",
+            "Para reduzir a quantidade de exemplos que o modelo precisa analisar."
         ],
         correct: 1
     },
     {
-        question: "Qual é a principal finalidade da regularização L2 (ridge) em um modelo linear?",
+        question: "Um modelo acerta muito nos exemplos usados no treino, mas erra bastante em casos novos. O que pode estar acontecendo?",
         options: [
-            "Selecionar exatamente um atributo de cada grupo de características correlacionadas, zerando seus coeficientes.",
-            "Aumentar o número de variáveis independentes do modelo.",
-            "Penalizar coeficientes grandes para reduzir variância e melhorar a generalização.",
-            "Garantir que o modelo alcance acurácia de 100% nos dados de treino."
+            "Ele recebeu exemplos demais e, por isso, deixou de conseguir fazer previsões.",
+            "Os casos novos precisam ser removidos para que o resultado do treino continue alto.",
+            "Ele pode ter se ajustado demais aos exemplos de treino, sem aprender padrões que funcionem bem em outros casos.",
+            "Ele está necessariamente funcionando como esperado, pois acertou durante o treino."
         ],
         correct: 2
     },
     {
-        question: "O que diferencia um conjunto de validação do conjunto de teste?",
+        question: "Se os dados usados para treinar um modelo representam mal parte das pessoas, qual pode ser uma consequência?",
         options: [
-            "O conjunto de validação é usado para ajustar hiperparâmetros; o de teste avalia o modelo final sem servir à seleção frequente.",
-            "O conjunto de validação contém apenas rótulos; o de teste contém apenas características.",
-            "O conjunto de teste é usado durante o treinamento; o de validação nunca é usado.",
-            "Não existe diferença: ambos podem ser usados indiscriminadamente durante o ajuste do modelo."
+            "O modelo pode apresentar resultados menos confiáveis para essas pessoas ou repetir distorções presentes nos dados.",
+            "O modelo corrige automaticamente os dados e passa a representar todas as pessoas igualmente.",
+            "A falta de exemplos variados afeta apenas o espaço de armazenamento, não as previsões.",
+            "O modelo deixa de conseguir fazer qualquer tipo de previsão."
         ],
         correct: 0
     },
     {
-        question: "Por que vazamento de dados (data leakage) pode invalidar uma avaliação de modelo?",
+        question: "Por que usar, sem querer, informações do teste durante o treinamento pode levar a uma avaliação enganosa?",
         options: [
-            "Porque faz o modelo funcionar apenas quando está conectado à internet.",
-            "Porque remove automaticamente todas as classes minoritárias dos dados.",
-            "Porque permite que informações do conjunto de teste influenciem o treinamento ou pré-processamento, produzindo avaliação otimista.",
-            "Porque substitui o conjunto de treino por dados sintéticos sem rótulos."
+            "Porque o teste fica maior que o treino e, por isso, todas as respostas se tornam aleatórias.",
+            "Porque os dados de teste não podem conter exemplos com respostas conhecidas.",
+            "Porque o treinamento passa a usar menos etapas e sempre demora mais.",
+            "Porque o modelo pode usar informações que não teria ao encontrar casos novos, fazendo o resultado parecer melhor do que realmente é."
         ],
-        correct: 2
+        correct: 3
     }
 ];
 
