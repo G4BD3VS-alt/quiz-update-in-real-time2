@@ -419,13 +419,13 @@ function closeAdminModal() {
 function verifyAdminPassword() {
     const pass = document.getElementById('admin-password').value;
 
-    if (pass === "1234") {
+    if (pass === "DROGASNOTCOOL") {
         document.getElementById('admin-auth-view').classList.add('is-hidden');
         document.getElementById('admin-panel-view').classList.remove('is-hidden');
 
         renderLeaderboard();
     } else {
-        alert("Senha incorreta! A senha padrão é 1234.");
+        alert("Senha incorreta!");
 
         document.getElementById('admin-password').value = "";
     }
